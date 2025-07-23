@@ -16,7 +16,7 @@ public class ProductRepositoryJson implements ProductRepository{
     private List<Product> list;
 
     public ProductRepositoryJson(){
-        ClassPathResource resource = new ClassPathResource("jason/product.json");
+        ClassPathResource resource = new ClassPathResource("json/product.json");
         ObjectMapper onObjectMapper = new ObjectMapper();
         try {
             list = Arrays.asList(onObjectMapper.readValue(resource.getFile(), Product[].class));
@@ -37,7 +37,7 @@ public class ProductRepositoryJson implements ProductRepository{
 
     @Override
     public Product findById(Long id) {
-        return null;
+        return list.stream().filter(p -> p.getId().equals(id)).findFirst().orElseThrow();
     }
 
 }
